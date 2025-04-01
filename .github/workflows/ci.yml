@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Linter
+    env:
+      MIX_ENV: test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 27.0
+          rebar3-version: 3.24
+      - run: rebar3 get-deps
+      - run: rebar3 fmt --check
+
+  test:
+    strategy:
+      matrix:
+        version:
+          - otp: 27.0
+            rebar3: 3.24
+    runs-on: ubuntu-latest
+    name: OTP ${{matrix.version.otp}} / Rebar3 ${{matrix.version.rebar3}}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{matrix.version.otp}}
+          rebar3-version: ${{matrix.version.rebar3}}
+      - run: rebar3 get-deps
+      - run: rebar3 do ct, cover
+

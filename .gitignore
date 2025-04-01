@@ -1,0 +1,10 @@
+# The directory rabar3 will write compiled artifacts to.
+_build/
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+erl_crash.dump
+
+# Where third-party dependencies like ExDoc output generated docs.
+/doc/
+
+.DS_Store
