@@ -92,7 +92,6 @@ fetch_container_id_attributes(Config) ->
             ContainerId = lists:foldl(
                 fun
                     (Line, none) ->
-                        leength,
                         if
                             byte_size(Line) > 64 ->
                                 {ok, binary:part(Line, byte_size(Line) - 64, 64)};
