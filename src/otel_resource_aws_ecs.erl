@@ -89,6 +89,11 @@ fetch_container_id_attributes(Config) ->
     case file:read_file(Path) of
         {ok, Data} ->
             Lines = binary:split(Data, <<"\n">>, [global]),
+            %% The Container ID will be a 64 byte long binary in the cgroup
+            %% file. Below we go through the file until we hit a line longer
+            %% than 64 bytes and return the last 64 bytes of that line. This is
+            %% in line with other otel SDKs, though there may be a cleaner way
+            %% to get the container ID.
             ContainerId = lists:foldl(
                 fun
                     (Line, none) ->
