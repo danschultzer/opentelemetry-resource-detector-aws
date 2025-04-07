@@ -1,6 +1,6 @@
 {application, opentelemetry_resource_detector_aws, [
     {description, "OpenTelemetry resource detector for AWS"},
-    {vsn, "0.0.1"},
+    {vsn, "0.1.0"},
     {registered, []},
     {applications, [
         kernel,
@@ -12,9 +12,9 @@
     {env, []},
     {modules, []},
 
-    {licenses, ["Apache-2.0"]},
+    {licenses, ["MIT"]},
     {links, [
-        {"GitHub", "https://github.com/danschultzer/opentelemetry-resource-detector-aws"},
+        {"GitHub", "https://github.com/open-telemetrex/opentelemetry_resource_detector_aws"},
         {"Sponsor", "https://github.com/sponsors/danschultzer"}
     ]}
 ]}.
